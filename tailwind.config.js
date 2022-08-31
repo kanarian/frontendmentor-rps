@@ -48,6 +48,7 @@ module.exports = {
           light:'hsl(349, 70%, 56%)',
           dark:'hsl(349, 71%, 52%)',
         },
+        cyanIconShadow:'hsl(189, 59%, 53%)',
         connectorBar:'#14223c'
       },
     },
