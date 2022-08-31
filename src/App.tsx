@@ -4,7 +4,8 @@ import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
 import { ReactComponent as Rules } from './images/image-rules.svg';
 import { ReactComponent as CloseIcon } from './images/icon-close.svg';
-import React, { useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { calcMoveByComputer } from './util/calcComp';
 
 
 const IconButton = ({name, additionalProps="", callBack=undefined}: {name: string, additionalProps?:string, callBack?: Function}) => {
@@ -53,6 +54,23 @@ const RulesModal = ({modalOpen, setModalOpenCallback} : {modalOpen: boolean, set
   );
 };
 
+const ShadedCircleTimer = ({children}: {children:ReactNode}) => {
+  const [waitingMode, setWaitingMode] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {setWaitingMode(false)},0)
+  },[])
+
+  if (waitingMode) return <div className="rounded-full md:h-48 md:w-48 h-32 w-32 bg-black/10"></div>
+  return ( 
+    <div>
+      {children}
+    </div>
+  );
+};
+
+
+
 function App() {
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -86,7 +104,10 @@ function App() {
               <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">YOU PICKED</p>
             </div>
             <div className="flex flex-col justify-center align-center items-center">
-              <div className="rounded-full md:h-48 md:w-48 h-32 w-32 bg-black/10"/>
+              <ShadedCircleTimer>
+                <IconButton name={calcMoveByComputer()}/>
+              </ShadedCircleTimer>
+              {/* <div className="rounded-full md:h-48 md:w-48 h-32 w-32 bg-black/10"/> */}
               <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">THE HOUSE PICKED</p>
             </div>
           </>
