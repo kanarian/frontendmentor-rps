@@ -4,7 +4,7 @@ import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
 import { ReactComponent as Rules } from './images/image-rules.svg';
 import { ReactComponent as CloseIcon } from './images/icon-close.svg';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 
 const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, name: string, additionalProps?:string}) => {
@@ -25,7 +25,6 @@ const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, na
 };
 
 const RulesModal = ({modalOpen, setModalOpenCallback} : {modalOpen: boolean, setModalOpenCallback:any}) => {
-  const modalRef = useRef();
 
   return (
       <div onClick={() => setModalOpenCallback(false)} className={`${modalOpen ? "flex" : "hidden"} bg-black/50 h-full w-full absolute z-50`}>
