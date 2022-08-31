@@ -107,8 +107,11 @@ function App() {
               <ShadedCircleTimer>
                 <IconButton name={calcMoveByComputer()}/>
               </ShadedCircleTimer>
-              {/* <div className="rounded-full md:h-48 md:w-48 h-32 w-32 bg-black/10"/> */}
               <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">THE HOUSE PICKED</p>
+            </div>
+            <div className="flex flex-col col-span-2 mt-20">
+              <h3 className="m-auto text-white text-5xl font-bold tracking-tighter mb-4">YOU WIN</h3>
+              <button className="bg-whiteBackground-light py-2 px-14 rounded-md text-backgroundGrad-from tracking-wider font-semibold">PLAY AGAIN</button>
             </div>
           </>
           }
