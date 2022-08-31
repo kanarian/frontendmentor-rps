@@ -27,14 +27,14 @@ const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, na
 const RulesModal = ({modalOpen, setModalOpenCallback} : {modalOpen: boolean, setModalOpenCallback:any}) => {
   return (
       <div className={`${modalOpen ? "flex" : "hidden"} bg-black/50 h-full w-full absolute z-50`}>
-        <div className=" bg-whiteBackground-light m-auto h-full w-full flex flex-col justify-around align-center items-center">
-          <h1 className="text-3xl text-backgroundGrad-from font-bold tracking-tighter">
+        <div className=" bg-whiteBackground-light m-auto h-full w-full md:h-96 md:w-96 md:rounded-md flex flex-col md:flex-row md:flex-wrap justify-around align-center items-center md:justify-between">
+          <h1 className="md:ml-4 md:order-1 text-3xl text-backgroundGrad-from font-bold tracking-tighter">
             RULES
           </h1>
-          <div>
+          <div className="md:m-auto md:order-3">
             <Rules/>
           </div>
-          <div className=" cursor-pointer">
+          <div className="md:mr-4 md:order-2 cursor-pointer">
             <CloseIcon onClick={() => setModalOpenCallback(false)}/>
           </div>
         </div>
