@@ -4,7 +4,7 @@ import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
 import { ReactComponent as Rules } from './images/image-rules.svg';
 import { ReactComponent as CloseIcon } from './images/icon-close.svg';
-import React, { ReactNode, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { calcMoveByComputer, calcWinner } from './util/calcComp';
 
 
@@ -83,7 +83,7 @@ function App() {
       setThisRoundWonBy("user")
     }
     if (winner === "computer"){
-      setScore(prev => prev == 0 ? 0 : prev-1)
+      setScore(prev => prev === 0 ? 0 : prev-1)
       setThisRoundWonBy("computer")
     }
   }
