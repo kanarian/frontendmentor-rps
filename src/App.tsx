@@ -2,14 +2,19 @@ import { ReactComponent as Paper } from './images/icon-paper.svg';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
+import React, { useState } from 'react';
 
-
-import React from 'react';
 
 const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, name: string, additionalProps?:string}) => {
-  var colorProps = `shadow-${name}Grad-dark bg-${name}Grad-light`
+  const nameToColorClassnames: {[key: string]: string} = {
+    'paper' : 'shadow-paperGrad-dark bg-paperGrad-light',
+    'rock': 'shadow-rockGrad-dark bg-rockGrad-light',
+    'scissors' : 'shadow-scissorsGrad-dark bg-scissorsGrad-light'
+  }
+  
+  const colorClassesToAdd =  nameToColorClassnames[name]
   return (
-    <div className={`relative z-40 shadow-[inset_0px_-4px_0px_0px] rounded-full ${colorProps} md:h-48 md:w-48 h-32 w-32 flex content-center justify-center items-center ${additionalProps}`}>
+    <div className={`relative z-40 shadow-[inset_0px_-4px_0px_0px] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 h-32 w-32 flex content-center justify-center items-center ${additionalProps}`}>
       <div className="shadow-[inset_0px_4px_0px_0px] shadow-whiteBackground-dark rounded-full md:h-40 md:w-40 bg-whiteBackground-light h-24 w-24 flex content-center justify-center items-center">
           {icon}
       </div>
@@ -17,11 +22,20 @@ const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, na
   );
 };
 
-
+const RulesModal = ({modalOpen} : {modalOpen: boolean}) => {
+  return (
+      <div className={modalOpen ? "hidden" : "flex" + " bg-red h-10"}>
+          DA RULES
+      </div>
+  );
+};
 
 function App() {
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
     <div className="flex h-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to">
+      <RulesModal modalOpen={modalOpen}/>
       <header className=" max-w-2xl mt-8 align-center items-center flex w-4/5 h-32 rounded-md border-headerOutline border-4 content-evenly justify-between">
         <Logo viewBox="25 0 100 100" className="h-16 w-32"/>
         <div className="bg-whiteBackground-light rounded-md h-24 px-6 mr-2 flex flex-col justify-center">
@@ -42,7 +56,9 @@ function App() {
         </div>
       </section>
       <section className="w-full flex justify-center md:justify-end md:mr-20">
-        <button className=" border text-whiteBackground-light px-6 py-2 rounded-md mb-10 text-xs tracking-widest">RULES</button>
+        <button 
+          onClick={() => setModalOpen(true)}
+          className=" border text-whiteBackground-light px-6 py-2 rounded-md mb-10 text-xs tracking-widest">RULES</button>
       </section>
     </div>
   );
