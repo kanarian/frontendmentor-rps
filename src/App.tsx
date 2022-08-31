@@ -2,6 +2,8 @@ import { ReactComponent as Paper } from './images/icon-paper.svg';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
+import { ReactComponent as Rules } from './images/image-rules.svg';
+import { ReactComponent as CloseIcon } from './images/icon-close.svg';
 import React, { useState } from 'react';
 
 
@@ -22,10 +24,20 @@ const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, na
   );
 };
 
-const RulesModal = ({modalOpen} : {modalOpen: boolean}) => {
+const RulesModal = ({modalOpen, setModalOpenCallback} : {modalOpen: boolean, setModalOpenCallback:any}) => {
   return (
-      <div className={modalOpen ? "hidden" : "flex" + " bg-red h-10"}>
-          DA RULES
+      <div className={`${modalOpen ? "flex" : "hidden"} bg-black/50 h-full w-full absolute z-50`}>
+        <div className=" bg-whiteBackground-light m-auto h-full w-full flex flex-col justify-around align-center items-center">
+          <h1 className="text-3xl text-backgroundGrad-from font-bold tracking-tighter">
+            RULES
+          </h1>
+          <div>
+            <Rules/>
+          </div>
+          <div className=" cursor-pointer">
+            <CloseIcon onClick={() => setModalOpenCallback(false)}/>
+          </div>
+        </div>
       </div>
   );
 };
@@ -35,7 +47,6 @@ function App() {
 
   return (
     <div className="flex h-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to">
-      <RulesModal modalOpen={modalOpen}/>
       <header className=" max-w-2xl mt-8 align-center items-center flex w-4/5 h-32 rounded-md border-headerOutline border-4 content-evenly justify-between">
         <Logo viewBox="25 0 100 100" className="h-16 w-32"/>
         <div className="bg-whiteBackground-light rounded-md h-24 px-6 mr-2 flex flex-col justify-center">
@@ -45,6 +56,7 @@ function App() {
           <div className="text-5xl text-center font-bold text-dark">8</div>
         </div>
       </header>
+      <RulesModal modalOpen={modalOpen} setModalOpenCallback = {setModalOpen}/>
       <section className='w-96'>
         <div className="grid md:gap-x-48 grid-cols-2 justify-items-center">
           <IconButton icon={<Paper/>} name="paper"/>
@@ -57,7 +69,7 @@ function App() {
       </section>
       <section className="w-full flex justify-center md:justify-end md:mr-20">
         <button 
-          onClick={() => setModalOpen(true)}
+          onClick={() => setModalOpen(prev => !prev)}
           className=" border text-whiteBackground-light px-6 py-2 rounded-md mb-10 text-xs tracking-widest">RULES</button>
       </section>
     </div>
