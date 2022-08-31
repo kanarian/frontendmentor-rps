@@ -4,7 +4,7 @@ import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
 import { ReactComponent as Rules } from './images/image-rules.svg';
 import { ReactComponent as CloseIcon } from './images/icon-close.svg';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 
 const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, name: string, additionalProps?:string}) => {
@@ -25,9 +25,11 @@ const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, na
 };
 
 const RulesModal = ({modalOpen, setModalOpenCallback} : {modalOpen: boolean, setModalOpenCallback:any}) => {
+  const modalRef = useRef();
+
   return (
-      <div className={`${modalOpen ? "flex" : "hidden"} bg-black/50 h-full w-full absolute z-50`}>
-        <div className=" bg-whiteBackground-light m-auto h-full w-full md:h-96 md:w-96 md:rounded-md flex flex-col md:flex-row md:flex-wrap justify-around align-center items-center md:justify-between">
+      <div onClick={() => setModalOpenCallback(false)} className={`${modalOpen ? "flex" : "hidden"} bg-black/50 h-full w-full absolute z-50`}>
+        <div onClick={(e) => e.stopPropagation()} className=" bg-whiteBackground-light m-auto h-full w-full md:h-96 md:w-96 md:rounded-md flex flex-col md:flex-row md:flex-wrap justify-around align-center items-center md:justify-between">
           <h1 className="md:ml-4 md:order-1 text-3xl text-backgroundGrad-from font-bold tracking-tighter">
             RULES
           </h1>
