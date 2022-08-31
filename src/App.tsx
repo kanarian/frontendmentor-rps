@@ -30,9 +30,9 @@ const IconButton = ({name, additionalProps="", callBack=undefined, showHalo=fals
       <div onClick={handleClick} className={`${!callbackUndefined ? "cursor-pointer" : ""} relative z-10 shadow-[inset_0px_-4px_0px_0px, 10px 10px black] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 h-32 w-32 flex content-center justify-center items-center ${additionalProps}`}>
               { showHalo &&
         <>
-          <div className=" -z-50 absolute w-96 h-96 bg-cyanIconShadow/5 rounded-full"/>
-          <div className=" -z-50 absolute w-72 h-72 bg-cyanIconShadow/5 rounded-full"/>
-          <div className=" -z-50 absolute w-56 h-56 bg-cyanIconShadow/5 rounded-full"/>
+          <div className=" -z-50 absolute md:w-[28rem] md:h-[28rem] w-96 h-96 bg-cyanIconShadow/5 rounded-full"/>
+          <div className=" -z-50 absolute md:w-96 md:h-96 w-72 h-72 bg-cyanIconShadow/5 rounded-full"/>
+          <div className=" -z-50 absolute md:w-72 md:h-72 w-56 h-56 bg-cyanIconShadow/5 rounded-full"/>
         </>
         }
         <div className=" relative z-10 shadow-[inset_0px_4px_0px_0px] shadow-whiteBackground-dark rounded-full md:h-40 md:w-40 bg-whiteBackground-light h-24 w-24 flex content-center justify-center items-center">
