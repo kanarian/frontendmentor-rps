@@ -7,16 +7,26 @@ import { ReactComponent as CloseIcon } from './images/icon-close.svg';
 import React, { useState } from 'react';
 
 
-const IconButton = ({icon, name, additionalProps=""}: {icon: React.ReactNode, name: string, additionalProps?:string}) => {
+const IconButton = ({name, additionalProps="", callBack=undefined}: {name: string, additionalProps?:string, callBack?: Function}) => {
+  var icon = null
+  const callbackUndefined = callBack === undefined
+
+  name === 'paper' ? icon = <Paper/> : name === "rock" ? icon=<Rock/> : icon=<Scissors/>
   const nameToColorClassnames: {[key: string]: string} = {
     'paper' : 'shadow-paperGrad-dark bg-paperGrad-light',
     'rock': 'shadow-rockGrad-dark bg-rockGrad-light',
     'scissors' : 'shadow-scissorsGrad-dark bg-scissorsGrad-light'
   }
+
+  const handleClick = () => {
+    if (callBack){
+      callBack(name)
+    }
+  }
   
   const colorClassesToAdd =  nameToColorClassnames[name]
   return (
-    <div className={`relative z-40 shadow-[inset_0px_-4px_0px_0px] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 h-32 w-32 flex content-center justify-center items-center ${additionalProps}`}>
+    <div onClick={handleClick} className={`${!callbackUndefined ? "cursor-pointer" : ""} relative z-40 shadow-[inset_0px_-4px_0px_0px] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 h-32 w-32 flex content-center justify-center items-center ${additionalProps}`}>
       <div className="shadow-[inset_0px_4px_0px_0px] shadow-whiteBackground-dark rounded-full md:h-40 md:w-40 bg-whiteBackground-light h-24 w-24 flex content-center justify-center items-center">
           {icon}
       </div>
@@ -46,6 +56,8 @@ const RulesModal = ({modalOpen, setModalOpenCallback} : {modalOpen: boolean, set
 function App() {
   const [modalOpen, setModalOpen] = useState(false)
 
+  const [userSelectedOption, setUserSelectedOption] = useState()
+
   return (
     <div className="flex h-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to">
       <header className=" max-w-2xl mt-8 align-center items-center flex w-4/5 h-32 rounded-md border-headerOutline border-4 content-evenly justify-between">
@@ -60,13 +72,26 @@ function App() {
       <RulesModal modalOpen={modalOpen} setModalOpenCallback = {setModalOpen}/>
       <section className='w-96'>
         <div className="grid md:gap-x-48 grid-cols-2 justify-items-center">
-          <IconButton icon={<Paper/>} name="paper"/>
-          <div className="h-4 w-32 absolute  md:translate-y-24 translate-y-14 bg-connectorBar"/>
-          <div className="h-4 w-32 rotate-45 md:-translate-x-24 -translate-x-6 translate-y-40 absolute bg-connectorBar"/>
-          <div className="h-4 w-32 -rotate-45 md:translate-x-24 translate-x-6 translate-y-40 absolute bg-connectorBar"/>
-          <IconButton icon={<Scissors/>} name="scissors"/>
-          <IconButton icon={<Rock/>} name="rock" additionalProps='col-span-2'/>
-        </div>
+          {!userSelectedOption ? <>
+            <IconButton name="paper" callBack={setUserSelectedOption}/>
+            <div className="h-4 w-32 absolute  md:translate-y-24 translate-y-14 bg-connectorBar"/>
+            <div className="h-4 w-32 rotate-45 md:-translate-x-24 -translate-x-6 translate-y-40 absolute bg-connectorBar"/>
+            <div className="h-4 w-32 -rotate-45 md:translate-x-24 translate-x-6 translate-y-40 absolute bg-connectorBar"/>
+            <IconButton name="scissors" callBack={setUserSelectedOption}/>
+            <IconButton name="rock" additionalProps='col-span-2' callBack={setUserSelectedOption}/>
+          </> : 
+          <>
+            <div className="flex flex-col justify-center align-center items-center">
+              <IconButton name={userSelectedOption}/>
+              <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">YOU PICKED</p>
+            </div>
+            <div className="flex flex-col justify-center align-center items-center">
+              <div className="rounded-full md:h-48 md:w-48 h-32 w-32 bg-black/10"/>
+              <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">THE HOUSE PICKED</p>
+            </div>
+          </>
+          }
+        </div> 
       </section>
       <section className="w-full flex justify-center md:justify-end md:mr-20">
         <button 
