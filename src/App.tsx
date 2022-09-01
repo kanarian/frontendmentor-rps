@@ -4,7 +4,6 @@ import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
 import { ReactComponent as Rules } from './images/image-rules.svg';
 import { ReactComponent as CloseIcon } from './images/icon-close.svg';
-import { ReactComponent as BackgroundTriangle } from './images/bg-triangle.svg';
 
 import { useState } from 'react';
 import { calcMoveByComputer, calcWinner } from './util/calcComp';
@@ -13,6 +12,7 @@ import { calcMoveByComputer, calcWinner } from './util/calcComp';
 const IconButton = ({name, additionalProps="", callBack=undefined, showHalo=false}: {name: string, additionalProps?:string, callBack?: Function, showHalo?:boolean}) => {
   var icon = null
   const callbackUndefined = callBack === undefined
+
 
   name === 'paper' ? icon = <Paper/> : name === "rock" ? icon=<Rock/> : icon=<Scissors/>
   const nameToColorClassnames: {[key: string]: string} = {
@@ -29,7 +29,7 @@ const IconButton = ({name, additionalProps="", callBack=undefined, showHalo=fals
   
   const colorClassesToAdd =  nameToColorClassnames[name]
   return (
-      <div onClick={handleClick} className={`${!callbackUndefined ? "cursor-pointer" : ""} relative z-10 shadow-[inset_0px_-4px_0px_0px, 10px 10px black] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 sm:h-32 sm:w-32 h-28 w-28 flex content-center justify-center items-center ${additionalProps}`}>
+      <button onClick={handleClick} className={`${!callbackUndefined ? "cursor-pointer" : ""} relative z-10 shadow-[inset_0px_-4px_0px_0px, 10px 10px black] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 sm:h-32 sm:w-32 h-28 w-28 flex content-center justify-center items-center ${additionalProps}`}>
               { showHalo &&
         <>
           <div className=" -z-50 absolute md:w-[28rem] md:h-[28rem] w-96 h-96 bg-cyanIconShadow/5 rounded-full"/>
@@ -40,7 +40,7 @@ const IconButton = ({name, additionalProps="", callBack=undefined, showHalo=fals
         <div className=" relative z-10 shadow-[inset_0px_4px_0px_0px] shadow-whiteBackground-dark rounded-full md:h-40 md:w-40 bg-whiteBackground-light sm:h-24 sm:w-24 h-20 w-20 flex content-center justify-center items-center">
             {icon}
         </div>
-      </div>
+      </button>
   );
 };
 
@@ -96,6 +96,7 @@ function App() {
     setThisRoundWonBy("")
   }
 
+  const [listOfText,setListOfText] = useState(["hi"])
 
   return (
     <div className=" relative z-10 flex h-screen w-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to overflow-hidden">
@@ -108,7 +109,7 @@ function App() {
           <div className="text-5xl text-center font-bold text-dark">{score}</div>
         </div>
       </header>
-      <section className='w-full '>
+      <div className='w-full '>
           {!userSelectedOption ? <>
             <div className="relative m-auto max-w-[28rem] grid md:gap-x-48 grid-cols-2 justify-items-center">
               <IconButton name="paper" callBack={handleUserSelectedOption}></IconButton>
@@ -134,9 +135,9 @@ function App() {
             </div>
           </div>
           }
-      </section>
+      </div>
       <section className="w-full flex justify-center md:justify-end md:mr-20">
-        <button 
+        <button
           onClick={() => setModalOpen(prev => !prev)}
           className=" border text-whiteBackground-light px-6 py-2 rounded-md mb-10 text-xs tracking-widest">RULES</button>
       </section>
