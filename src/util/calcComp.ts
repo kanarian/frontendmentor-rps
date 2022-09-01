@@ -2,7 +2,6 @@ export const calcMoveByComputer = () => {
     const min = 1
     const max = 3 + 1
     const computerMove = Math.floor(Math.random() * (max - min) ) + min;
-    console.log('compmove',computerMove)
     return fromMoveToString(computerMove)
 }
 
@@ -15,11 +14,8 @@ const fromStringToMove = (move: string) => {
 }
 
 export const calcWinner = (userString: string, computerString: string) => {
-    console.log('userString',userString)
     const userValue = fromStringToMove(userString)
     const computerValue = fromStringToMove(computerString)
-    console.log('uservalue',userValue)
-    console.log('compval',computerValue)
 
     if (userValue === computerValue){
         return "draw"
