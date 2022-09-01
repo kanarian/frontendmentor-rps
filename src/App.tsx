@@ -4,6 +4,8 @@ import { ReactComponent as Scissors } from './images/icon-scissors.svg';
 import { ReactComponent as Rock } from './images/icon-rock.svg';
 import { ReactComponent as Rules } from './images/image-rules.svg';
 import { ReactComponent as CloseIcon } from './images/icon-close.svg';
+import { ReactComponent as BackgroundTriangle } from './images/bg-triangle.svg';
+
 import { useState } from 'react';
 import { calcMoveByComputer, calcWinner } from './util/calcComp';
 
@@ -96,7 +98,7 @@ function App() {
 
 
   return (
-    <div className=" relative z-10 flex h-screen w-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to">
+    <div className=" relative z-10 flex h-screen w-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to overflow-hidden">
       <header className="relative z-50 max-w-2xl mt-8 align-center items-center flex w-4/5 h-32 rounded-md border-headerOutline border-4 content-evenly justify-between">
         <Logo viewBox="25 0 100 100" className="h-16 w-32"/>
         <div className=" bg-whiteBackground-light rounded-md h-24 px-6 mr-2 flex flex-col justify-center">
@@ -108,21 +110,21 @@ function App() {
       </header>
       <section className='w-full '>
           {!userSelectedOption ? <>
-            <div className="m-auto w-[28rem] grid md:gap-x-48 grid-cols-2 justify-items-center">
-              <IconButton name="paper" callBack={handleUserSelectedOption}/>
-              <div className="h-4 w-32 absolute  md:translate-y-24 translate-y-14 bg-connectorBar"/>
-              <div className="h-4 w-32 rotate-45 md:-translate-x-24 -translate-x-6 translate-y-40 absolute bg-connectorBar"/>
-              <div className="h-4 w-32 -rotate-45 md:translate-x-24 translate-x-6 translate-y-40 absolute bg-connectorBar"/>
+            <div className="relative m-auto max-w-[28rem] grid md:gap-x-48 grid-cols-2 justify-items-center">
+              <IconButton name="paper" callBack={handleUserSelectedOption}></IconButton>
               <IconButton name="scissors" callBack={handleUserSelectedOption}/>
               <IconButton name="rock" additionalProps='col-span-2' callBack={handleUserSelectedOption}/>
+              <div className="h-4 w-32 absolute md:translate-y-24 translate-y-14 bg-connectorBar"/>
+              <div className="h-4 w-40 rotate-45 md:-translate-x-24 -translate-x-6 translate-y-40 absolute bg-connectorBar"/>
+              <div className="h-4 w-40 -rotate-45 md:translate-x-24 translate-x-6 translate-y-40 absolute bg-connectorBar"/>
             </div> 
           </> : 
-          <div className="m-auto flex space-between flex-wrap md:flex-nowrap justify-evenly items-center w-2/3 max-w-5xl">
-            <div className={`relative ${thisRoundWonBy==="user" ? "z-10" :"z-20"} md:order-1 flex flex-col justify-center align-center items-center p-2`}>
+          <div className="m-auto flex space-between flex-wrap md:flex-nowrap justify-evenly items-center w-3/4 max-w-5xl">
+            <div className={`relative ${thisRoundWonBy==="user" ? "z-10" :"z-20"} md:order-1 flex flex-col justify-center align-center items-center p-1`}>
               <IconButton name={userSelectedOption} showHalo={thisRoundWonBy === "user"}/>
               <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">YOU PICKED</p>
             </div>
-            <div className={`relative ${thisRoundWonBy==="computer" ? "z-10" :"z-20"} md:order-3 flex flex-col justify-center align-center items-center p-2`}>
+            <div className={`relative ${thisRoundWonBy==="computer" ? "z-10" :"z-20"} md:order-3 flex flex-col justify-center align-center items-center p-1`}>
                 <IconButton name={computerSelectedOption} showHalo={thisRoundWonBy === "computer"}/>
               <p className="md:mb-10 md:text-xl md:order-first text-whiteBackground-light tracking-tight mt-4">THE HOUSE PICKED</p>
             </div>
