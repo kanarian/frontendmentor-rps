@@ -115,8 +115,8 @@ function App() {
               <IconButton name="scissors" callBack={handleUserSelectedOption}/>
               <IconButton name="rock" additionalProps='col-span-2' callBack={handleUserSelectedOption}/>
               <div className="h-4 w-32 absolute md:translate-y-24 translate-y-14 bg-connectorBar"/>
-              <div className="h-4 w-40 rotate-45 md:-translate-x-24 -translate-x-6 translate-y-40 absolute bg-connectorBar"/>
-              <div className="h-4 w-40 -rotate-45 md:translate-x-24 translate-x-6 translate-y-40 absolute bg-connectorBar"/>
+              <div className="h-4 w-40 md:w-48 rotate-45 md:-translate-x-32 -translate-x-8 translate-y-36 absolute bg-connectorBar"/>
+              <div className="h-4 w-40 md:w-48 -rotate-45 md:translate-x-32 translate-x-8 translate-y-36 absolute bg-connectorBar"/>
             </div> 
           </> : 
           <div className="m-auto flex space-between flex-wrap md:flex-nowrap justify-evenly items-center w-3/4 max-w-5xl">
