@@ -29,7 +29,7 @@ const IconButton = ({name, additionalProps="", callBack=undefined, showHalo=fals
   
   const colorClassesToAdd =  nameToColorClassnames[name]
   return (
-      <div onClick={handleClick} className={`${!callbackUndefined ? "cursor-pointer" : ""} relative z-10 shadow-[inset_0px_-4px_0px_0px, 10px 10px black] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 h-32 w-32 flex content-center justify-center items-center ${additionalProps}`}>
+      <div onClick={handleClick} className={`${!callbackUndefined ? "cursor-pointer" : ""} relative z-10 shadow-[inset_0px_-4px_0px_0px, 10px 10px black] rounded-full ${colorClassesToAdd} md:h-48 md:w-48 sm:h-32 sm:w-32 h-28 w-28 flex content-center justify-center items-center ${additionalProps}`}>
               { showHalo &&
         <>
           <div className=" -z-50 absolute md:w-[28rem] md:h-[28rem] w-96 h-96 bg-cyanIconShadow/5 rounded-full"/>
@@ -37,7 +37,7 @@ const IconButton = ({name, additionalProps="", callBack=undefined, showHalo=fals
           <div className=" -z-50 absolute md:w-72 md:h-72 w-56 h-56 bg-cyanIconShadow/5 rounded-full"/>
         </>
         }
-        <div className=" relative z-10 shadow-[inset_0px_4px_0px_0px] shadow-whiteBackground-dark rounded-full md:h-40 md:w-40 bg-whiteBackground-light h-24 w-24 flex content-center justify-center items-center">
+        <div className=" relative z-10 shadow-[inset_0px_4px_0px_0px] shadow-whiteBackground-dark rounded-full md:h-40 md:w-40 bg-whiteBackground-light sm:h-24 sm:w-24 h-20 w-20 flex content-center justify-center items-center">
             {icon}
         </div>
       </div>
@@ -101,7 +101,7 @@ function App() {
     <div className=" relative z-10 flex h-screen w-screen flex-col content-center items-center justify-between bg-radial-at-t from-backgroundGrad-from to-backgroundGrad-to overflow-hidden">
       <header className="relative z-50 max-w-2xl mt-8 align-center items-center flex w-4/5 h-32 rounded-md border-headerOutline border-4 content-evenly justify-between">
         <Logo viewBox="25 0 100 100" className="h-16 w-32"/>
-        <div className=" bg-whiteBackground-light rounded-md h-24 px-6 mr-2 flex flex-col justify-center">
+        <div className=" bg-whiteBackground-light rounded-md h-24 px-6 my-4 mr-2 flex flex-col justify-center">
           <div className=" text-score tracking-widest text-xs font-bold">
             SCORE
           </div>
